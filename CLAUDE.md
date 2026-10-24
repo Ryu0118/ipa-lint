@@ -1,4 +1,10 @@
-# IPALint
+# ipa-lint
+
+`ipa-lint` statically checks a built iOS app (`.ipa`, `.xcarchive`, or `.app`) for files that should not ship, security problems (ATS exceptions, debug entitlements, embedded secrets), and App Store review risks, and compares a build against a snapshot of a previous one. It never runs or decompiles the app; it reads files, plists, Mach-O headers, and `codesign` output.
+
+Rules live in `Sources/IPALintKit/Rules/` (one type per rule, registered in `RuleCatalog.all`). Rule hits never touch the real app in tests: build a synthetic `.app` tree in a temporary directory. Never commit a real app, its plists, or its entitlements as a fixture. Secret-like test strings are assembled at runtime so gitleaks does not flag the test sources.
+
+The executable product is `ipa-lint`; the targets keep the `IPALint` prefix.
 
 Swift executable package: `IPALint` (`@main` + composition only) → `IPALintCLI` (ArgumentParser surface and external adapters only, tested in `IPALintCLITests`) → `IPALintKit` (all use-case logic and workflow sequencing, tested in `IPALintKitTests`). Swift Testing only.
 
