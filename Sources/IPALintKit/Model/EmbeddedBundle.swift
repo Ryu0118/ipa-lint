@@ -9,9 +9,9 @@ package struct EmbeddedBundle: Equatable, Sendable {
     /// The code-signing entitlements; empty for frameworks and unsigned bundles.
     package var entitlements: [String: PlistValue]
 
-    /// The path to show for the bundle itself: its directory, or `Info.plist` for the app.
+    /// The path to show for the bundle itself: its directory, or `.` for the app.
     package var displayPath: String {
-        path.isEmpty ? "Info.plist" : path
+        path.isEmpty ? "." : path
     }
 
     package init(path: String, kind: BundleKind, infoPlist: [String: PlistValue], entitlements: [String: PlistValue]) {
