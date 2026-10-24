@@ -8,12 +8,9 @@ struct IPALintCommandTests {
         #expect(IPALintCommand.configuration.version == IPALintVersion.current)
     }
 
-    @Test("prints the Kit greeting through the injected output")
-    func printsGreeting() async throws {
-        let recording = RecordingOutput()
-        let context = CLIContext(output: recording.output, environment: [:])
-        try await IPALintCommand.parse([]).run(context: context)
-        #expect(recording.standardOutput == [IPALintKit.greeting()])
-        #expect(recording.standardError.isEmpty)
+    @Test("runs lint when no subcommand is given")
+    func defaultsToLint() throws {
+        let command = try IPALintCommand.parseAsRoot(["App.ipa"])
+        #expect(command is LintCommand)
     }
 }
