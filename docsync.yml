@@ -1,4 +1,12 @@
 rules:
+- name: readme-rules
+  sources:
+  - Sources/IPALintKit/Rules/**/*.swift
+  - Sources/IPALintCLI/Commands/*.swift
+  doc: README.md
+  message: A rule or command changed; update the rule table and command reference
+    in README.md.
+  checksum: 7ba3f02a0af22e592252ec6742366c1b651cb5638d431eb70729a594ee50424c
 - name: readme-package
   sources:
   - Package.swift
