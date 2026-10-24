@@ -16,23 +16,23 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "IPALint",
-            dependencies: ["IPALintCLI"]
+            dependencies: ["IPALintCLI"],
         ),
         .target(
             name: "IPALintCLI",
             dependencies: [
                 "IPALintKit",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
-            ]
+            ],
         ),
         .target(name: "IPALintKit"),
         .testTarget(
             name: "IPALintCLITests",
-            dependencies: ["IPALintCLI"]
+            dependencies: ["IPALintCLI"],
         ),
         .testTarget(
             name: "IPALintKitTests",
-            dependencies: ["IPALintKit"]
+            dependencies: ["IPALintKit"],
         ),
-    ]
+    ],
 )

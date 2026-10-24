@@ -7,7 +7,7 @@ package struct IPALintCommand: ContextualCommand {
     package static let configuration = CommandConfiguration(
         commandName: "IPALint",
         abstract: "IPALint command-line tool.",
-        version: IPALintVersion.current
+        version: IPALintVersion.current,
     )
 
     package init() {}

@@ -6,9 +6,9 @@ package protocol ContextualCommand: AsyncParsableCommand {
     func run(context: CLIContext) async throws
 }
 
-extension ContextualCommand {
+package extension ContextualCommand {
     /// Runs the command against the live process context.
-    package func run() async throws {
+    func run() async throws {
         try await run(context: .live)
     }
 }

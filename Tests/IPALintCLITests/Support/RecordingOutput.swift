@@ -16,7 +16,7 @@ final class RecordingOutput: Sendable {
     var output: CLIOutput {
         CLIOutput(
             standardOutput: { line in self.lines.withLock { $0.stdout.append(line) } },
-            standardError: { line in self.lines.withLock { $0.stderr.append(line) } }
+            standardError: { line in self.lines.withLock { $0.stderr.append(line) } },
         )
     }
 }

@@ -10,12 +10,12 @@ package struct CLIOutput: Sendable {
     /// The process's real stdout and stderr.
     package static let live = CLIOutput(
         standardOutput: { print($0) },
-        standardError: { FileHandle.standardError.write(Data(($0 + "\n").utf8)) }
+        standardError: { FileHandle.standardError.write(Data(($0 + "\n").utf8)) },
     )
 
     package init(
         standardOutput: @escaping @Sendable (String) -> Void,
-        standardError: @escaping @Sendable (String) -> Void
+        standardError: @escaping @Sendable (String) -> Void,
     ) {
         self.standardOutput = standardOutput
         self.standardError = standardError
