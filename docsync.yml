@@ -1,0 +1,41 @@
+# Keep the public README and project instructions aligned with the package/tooling definition.
+rules:
+  - name: readme-package
+    sources:
+      - Package.swift
+    doc: README.md
+    message: Package.swift changed; review the user-facing package commands in README.md.
+    checksum: ""
+
+  - name: claude-package
+    sources:
+      - Package.swift
+    doc: CLAUDE.md
+    message: Package.swift changed; review the package architecture in CLAUDE.md.
+    checksum: ""
+
+  - name: claude-mise-tasks
+    sources:
+      - .mise.toml
+    doc: CLAUDE.md
+    message: .mise.toml changed; review the command list in CLAUDE.md.
+    checksum: ""
+
+  - name: rules-lint-and-format
+    sources:
+      - .swiftformat
+      - .swiftlint.yml
+      - .my-swift-linter.yml
+    doc: .agents/rules/lint-and-format.md
+    message: A lint or format config changed; update .agents/rules/lint-and-format.md to match.
+    checksum: ""
+
+  - name: rules-workflow
+    sources:
+      - .gitnagg.yml
+      - .githooks/pre-commit
+      - .githooks/pre-push
+      - scripts/lint-staged.sh
+    doc: .agents/rules/workflow.md
+    message: A commit gate or hook changed; update .agents/rules/workflow.md to match.
+    checksum: ""
