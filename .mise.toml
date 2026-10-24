@@ -67,7 +67,7 @@ run = "docsync update-checksum --config docsync.yml"
 
 [tasks.run]
 description = "Run the executable"
-run = "swift run IPALint"
+run = "swift run ipa-lint"
 
 [tasks.setup-hooks]
 description = "Configure Git to use the shared hooks"

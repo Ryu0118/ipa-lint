@@ -62,8 +62,8 @@ jobs:
       - name: Create Archive
         run: |
           cd .build/apple/Products/Release
-          tar -czvf "IPALint-${VERSION}-darwin-universal.tar.gz" IPALint
-          shasum -a 256 "IPALint-${VERSION}-darwin-universal.tar.gz" > "IPALint-${VERSION}-darwin-universal.tar.gz.sha256"
+          tar -czvf "ipa-lint-${VERSION}-darwin-universal.tar.gz" ipa-lint
+          shasum -a 256 "ipa-lint-${VERSION}-darwin-universal.tar.gz" > "ipa-lint-${VERSION}-darwin-universal.tar.gz.sha256"
         env:
 
           VERSION: ${{ inputs.version }}
@@ -72,10 +72,10 @@ jobs:
       - name: Upload release archive
         uses: actions/upload-artifact@v6
         with:
-          name: IPALint-darwin-universal
+          name: ipa-lint-darwin-universal
           path: |
-            .build/apple/Products/Release/IPALint-${{ inputs.version }}-darwin-universal.tar.gz
-            .build/apple/Products/Release/IPALint-${{ inputs.version }}-darwin-universal.tar.gz.sha256
+            .build/apple/Products/Release/ipa-lint-${{ inputs.version }}-darwin-universal.tar.gz
+            .build/apple/Products/Release/ipa-lint-${{ inputs.version }}-darwin-universal.tar.gz.sha256
           if-no-files-found: error
 
   # Version bump + push only after the build succeeds.
@@ -133,7 +133,7 @@ jobs:
       - name: Download release archive
         uses: actions/download-artifact@v6
         with:
-          name: IPALint-darwin-universal
+          name: ipa-lint-darwin-universal
           path: /tmp/release-assets
 
       - name: Create GitHub Release with all assets
