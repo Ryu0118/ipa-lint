@@ -9,7 +9,24 @@ package enum RuleCatalog {
     )
 
     /// The rules that inspect the app.
-    package static let all: [any LintRule] = []
+    package static let all: [any LintRule] = [
+        DevArtifactRule(),
+        SourceFileRule(),
+        FrameworkHeadersRule(),
+        DuplicateResourceRule(),
+        LargeFileRule(),
+        CredentialFileRule(),
+        ATSExceptionRule(),
+        DebugEntitlementRule(),
+        EmbeddedSecretRule(),
+        InsecureURLRule(),
+        MissingPrivacyManifestRule(),
+        SimulatorSliceRule(),
+        MinOSMismatchRule(),
+        NewFileRule(),
+        NewEntitlementRule(),
+        SizeGrowthRule(),
+    ]
 
     /// The descriptors of every rule, including `stale-allow`.
     package static var descriptors: [RuleDescriptor] {

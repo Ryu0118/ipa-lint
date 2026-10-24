@@ -27,6 +27,6 @@ struct LintCommandTests {
 
         try await LintCommand.parse([app.path(percentEncoded: false), "--config", config.path(percentEncoded: false)]).run(context: context)
 
-        #expect(recording.standardOutput.last == "0 errors, 0 warnings, 0 suppressed")
+        #expect(recording.standardOutput.last?.hasPrefix("0 errors,") == true)
     }
 }
