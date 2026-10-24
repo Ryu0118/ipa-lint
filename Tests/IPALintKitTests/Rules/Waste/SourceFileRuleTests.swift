@@ -6,7 +6,7 @@ struct SourceFileRuleTests {
         "Main.swift", "a.m", "a.mm", "a.c", "a.cc", "a.cpp", "README.md", "notes.markdown",
         "build.sh", "tool.py", "tool.rb", "ci.yml", "ci.yaml", "Debug.xcconfig", "a.orig", "a.rej", "run.log",
         "Support.h", "Resources/.DS_Store", "Podfile", "Podfile.lock", "Package.swift", "Package.resolved",
-        "Cartfile", "Makefile",
+        "Cartfile", "Makefile", "strings.backup", "data.bak", "draft.tmp", ".Main.swift.swp",
     ])
     func flagsSourceFiles(path: String) async throws {
         let app = try TemporaryApp()

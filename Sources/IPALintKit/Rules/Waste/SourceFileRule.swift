@@ -2,7 +2,7 @@
 package struct SourceFileRule: LintRule {
     private static let extensions: Set<String> = [
         "swift", "m", "mm", "c", "cc", "cpp", "md", "markdown", "sh", "py", "rb",
-        "yml", "yaml", "xcconfig", "orig", "rej", "log",
+        "yml", "yaml", "xcconfig", "orig", "rej", "log", "backup", "bak", "tmp", "swp",
     ]
     private static let names: Set<String> = [
         ".DS_Store", "Podfile", "Podfile.lock", "Package.swift", "Package.resolved", "Cartfile", "Makefile",
@@ -13,7 +13,7 @@ package struct SourceFileRule: LintRule {
         id: "source-file",
         category: .waste,
         defaultSeverity: .error,
-        summary: "Source code or tooling files (.swift, .md, Podfile, .DS_Store, ...) ship in the app.",
+        summary: "Source, tooling, or backup files (.swift, .md, Podfile, .DS_Store, .backup, ...) ship in the app.",
     )
 
     package init() {}
