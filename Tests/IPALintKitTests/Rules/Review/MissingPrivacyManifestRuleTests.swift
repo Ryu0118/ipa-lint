@@ -31,14 +31,24 @@ struct MissingPrivacyManifestRuleTests {
         #expect(hits.map(\.path) == ["Frameworks/Kit.framework"])
     }
 
-    @Test("requires the manifest directly in the bundle directory, not in a subdirectory")
-    func requiresDirectChild() async throws {
+    @Test("accepts a framework whose manifest sits in a nested resource bundle, as SwiftPM-built SDKs ship it")
+    func acceptsNestedFrameworkManifest() async throws {
         let app = try makeApp(appManifest: true, frameworkManifest: false)
-        try app.write("Frameworks/Kit.framework/Resources/\(Self.manifest)", size: 4)
+        try app.write("Frameworks/Kit.framework/Kit_Privacy.bundle/\(Self.manifest)", size: 4)
 
         let hits = try await RuleHarness.check(MissingPrivacyManifestRule(), in: app)
 
-        #expect(hits.map(\.path) == ["Frameworks/Kit.framework"])
+        #expect(hits.isEmpty)
+    }
+
+    @Test("requires the app's own manifest at its root: a package's resource bundle does not cover the app")
+    func requiresAppManifestAtRoot() async throws {
+        let app = try makeApp(appManifest: false, frameworkManifest: true)
+        try app.write("Lottie_Lottie.bundle/\(Self.manifest)", size: 4)
+
+        let hits = try await RuleHarness.check(MissingPrivacyManifestRule(), in: app)
+
+        #expect(hits.map(\.path) == ["."])
     }
 
     @Test("does not require a manifest in extensions")
