@@ -7,12 +7,12 @@ package struct LargeFileRule: LintRule {
         id: "large-file",
         category: .waste,
         defaultSeverity: .warning,
-        summary: "A resource file (not a Mach-O binary or Assets.car) is larger than the size limit.",
+        summary: "A resource file (not a Mach-O binary, Assets.car, or the code signature) is larger than the size limit.",
     )
 
     package init() {}
 
-    /// Reports every file larger than `max_bytes` that is neither a Mach-O binary nor `Assets.car`.
+    /// Reports every file larger than `max_bytes` that is not a Mach-O binary, `Assets.car`, or code-signature data.
     package func check(_ context: RuleContext) -> [RuleHit] {
         let limit = context.settings.maxBytes ?? Self.defaultMaxBytes
         return context.contents.files
@@ -27,7 +27,8 @@ package struct LargeFileRule: LintRule {
     }
 
     private static func isResource(_ path: String, in context: RuleContext) -> Bool {
-        guard path.split(separator: "/").last != "Assets.car", let data = context.data(at: path) else {
+        let components = path.split(separator: "/")
+        guard components.last != "Assets.car", !components.contains("_CodeSignature"), let data = context.data(at: path) else {
             return false
         }
         return !MachOMagic.isMachO(data)
