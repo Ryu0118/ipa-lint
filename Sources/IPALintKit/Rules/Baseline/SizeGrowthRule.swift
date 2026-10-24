@@ -26,7 +26,7 @@ package struct SizeGrowthRule: LintRule {
         if after - before > threshold {
             hits.append(RuleHit(
                 path: ".",
-                message: "The app grew from \(Self.megabytes(before)) to \(Self.megabytes(after)) (+\(Self.megabytes(after - before))), more than the allowed \(Self.megabytes(threshold)). Check the files that grew or were added.",
+                message: "The app grew from \(ByteSize.megabytes(before)) to \(ByteSize.megabytes(after)) (+\(ByteSize.megabytes(after - before))), more than the allowed \(ByteSize.megabytes(threshold)). Check the files that grew or were added.",
             ))
         }
         let previous = Dictionary(baseline.files.map { ($0.path, $0.size) }, uniquingKeysWith: { first, _ in first })
@@ -34,12 +34,8 @@ package struct SizeGrowthRule: LintRule {
             guard let old = previous[file.path], file.size - old > threshold else {
                 return nil
             }
-            return RuleHit(path: file.path, message: "Grew from \(Self.megabytes(old)) to \(Self.megabytes(file.size)) (+\(Self.megabytes(file.size - old))), more than the allowed \(Self.megabytes(threshold)). Check whether the growth is intended.")
+            return RuleHit(path: file.path, message: "Grew from \(ByteSize.megabytes(old)) to \(ByteSize.megabytes(file.size)) (+\(ByteSize.megabytes(file.size - old))), more than the allowed \(ByteSize.megabytes(threshold)). Check whether the growth is intended.")
         }
         return hits + grown
-    }
-
-    private static func megabytes(_ bytes: Int) -> String {
-        String(format: "%.1f MB", Double(bytes) / 1_048_576)
     }
 }

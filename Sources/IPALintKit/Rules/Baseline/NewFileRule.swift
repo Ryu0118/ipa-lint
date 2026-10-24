@@ -18,6 +18,6 @@ package struct NewFileRule: LintRule {
         let known = Set(baseline.files.map(\.path))
         return context.contents.files
             .filter { !known.contains($0.path) }
-            .map { RuleHit(path: $0.path, message: "New file (\($0.size) bytes) that is not in the baseline. Confirm it is meant to ship, or exclude it from the build.") }
+            .map { RuleHit(path: $0.path, message: "New file (\(ByteSize.describe($0.size))) that is not in the baseline. Confirm it is meant to ship, or exclude it from the build.") }
     }
 }

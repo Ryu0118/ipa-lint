@@ -23,7 +23,7 @@ struct NewFileRuleTests {
         let hits = try await RuleHarness.check(NewFileRule(), in: app, baseline: baseline)
 
         #expect(hits.map(\.path) == ["new/a.bin", "new/b.bin"])
-        #expect(hits[1].message.contains("2048 bytes"))
+        #expect(hits[1].message.contains("2 KB"))
     }
 
     @Test("reports nothing when every file is in the baseline")
