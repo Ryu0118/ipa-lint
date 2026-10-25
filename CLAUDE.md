@@ -30,3 +30,7 @@ Read these before writing or reviewing code. They are the source of truth (`.cla
 - `.agents/rules/workflow.md` — commit size, Git and agent hooks, docsync, CI
 
 Access policy: use `package` for anything shared across modules in this package; `public` only for symbols consumed outside it.
+
+## Documentation and code
+
+When documentation and the existing code disagree, follow the conventions used in the existing code, and in your final reply list every inconsistency you found between the documentation and the code.
